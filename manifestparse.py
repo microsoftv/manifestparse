@@ -97,7 +97,7 @@ class ReleaseManifestFile:
             self.type = struct.unpack('I', data.read(4))[0]
             entries = struct.unpack('I', data.read(4))[0]
             self.version = struct.unpack('I', data.read(4))[0]
-            self.allDirectories = []
+            self.directories = []
             self.mainDirectories = []
             self.subDirectories = []
             self.files = []
@@ -147,7 +147,7 @@ class ReleaseManifestFile:
 
             for i in range(directoryCount):
                 newdir = ManifestDirectory(solveTempDir(tempstrings, tempfiles, tempdirectories, tempdirectories[i]))
-                self.allDirectories.append(newdir)
+                self.directories.append(newdir)
                 for j in range(len(newdir.subDirectories)):
                     self.subDirectories.append(newdir.subDirectories[j])
 
@@ -159,9 +159,9 @@ class ReleaseManifestFile:
                     
                     self.files.append(file)
 
-            for i in range(len(self.allDirectories)):
+            for i in range(len(self.directories)):
                 goNext = False
-                dir = self.allDirectories[i]
+                dir = self.directories[i]
 
                 for j in range(len(self.mainDirectories)):
                     if dir.name == self.mainDirectories[j].name:
