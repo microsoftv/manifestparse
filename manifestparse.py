@@ -193,7 +193,7 @@ def main():
         print(__doc__)
         sys.exit(1)
 
-    if len(sys.argv) >= 3:
+    if len(sys.argv) >= 2:
         if not os.path.exists(sys.argv[1]):
             print("File does not exist.")
             print(__doc__)
@@ -202,7 +202,10 @@ def main():
         rmf = ReleaseManifestFile(sys.argv[1])
 
         if len(sys.argv) == 3:
-            with open('release_manifest.txt', 'w') as f:
+            with open (sys.argv[2] + 'releasemanifest.txt', 'w') as f:
+                f.write(str(rmf))
+        else:
+            with open ('releasemanifest.txt', 'w') as f:
                 f.write(str(rmf))
 
         print("Finished parsing Release Manifest.")
