@@ -202,7 +202,10 @@ def main():
         rmf = ReleaseManifestFile(sys.argv[1])
 
         if len(sys.argv) == 3:
-            with open (sys.argv[2] + '\\releasemanifest.txt', 'w') as f:
+            file_path = os.path.join(sys.argv[2], 'releasemanifest.txt')
+            if not os.path.exists(sys.argv[2]):
+                os.makedirs(sys.argv[2])
+            with open (file_path, 'w') as f:
                 f.write(str(rmf))
         else:
             with open ('releasemanifest.txt', 'w') as f:
